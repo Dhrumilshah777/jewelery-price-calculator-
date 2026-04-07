@@ -41,6 +41,7 @@ export default function Home() {
   const [saved, setSaved] = useState<
     Array<{
       id: string;
+      key: string;
       createdAt: number;
       price24: string;
       price22Shown: number;
@@ -56,7 +57,17 @@ export default function Home() {
       const raw = localStorage.getItem("jewelry_saved_v1");
       if (!raw) return;
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) setSaved(parsed);
+      if (!Array.isArray(parsed)) return;
+      const normalized = parsed
+        .filter((x) => x && typeof x === "object")
+        .map((x) => {
+          const price24 = typeof x.price24 === "string" ? x.price24 : "";
+          const weightGm = typeof x.weightGm === "string" ? x.weightGm : "";
+          const key =
+            typeof x.key === "string" ? x.key : `${price24}|${weightGm}`;
+          return { ...x, price24, weightGm, key };
+        });
+      setSaved(normalized);
     } catch {
       // ignore
     }
@@ -87,11 +98,13 @@ export default function Home() {
   }, [price24, weightGm]);
 
   function handleSave() {
+    const key = `${price24.trim()}|${weightGm.trim()}`;
     const entry = {
       id:
         typeof crypto !== "undefined" && "randomUUID" in crypto
           ? crypto.randomUUID()
           : String(Date.now()),
+      key,
       createdAt: Date.now(),
       price24: price24.trim(),
       price22Shown: computed.derived22,
@@ -100,7 +113,17 @@ export default function Home() {
       final22: computed.p22FinalShown,
       final18: computed.p18.shownFinal,
     };
-    const next = [entry, ...saved].slice(0, 50);
+
+    const existingIdx = saved.findIndex((s) => s.key === key);
+    const next =
+      existingIdx >= 0
+        ? [
+            { ...saved[existingIdx], ...entry, id: saved[existingIdx].id },
+            ...saved.slice(0, existingIdx),
+            ...saved.slice(existingIdx + 1),
+          ].slice(0, 50)
+        : [entry, ...saved].slice(0, 50);
+
     setSaved(next);
     try {
       localStorage.setItem("jewelry_saved_v1", JSON.stringify(next));
