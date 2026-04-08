@@ -110,8 +110,8 @@ export default function Home() {
       price22Shown: computed.derived22,
       price18Shown: computed.derived18,
       weightGm: weightGm.trim(),
-      final22: computed.p22FinalShown,
-      final18: computed.p18.shownFinal,
+      final22: computed.final22.shownFinal,
+      final18: computed.final18.shownFinal,
     };
 
     const existingIdx = saved.findIndex((s) => s.key === key);
@@ -284,7 +284,7 @@ export default function Home() {
                   <div
                     className="font-semibold tabular-nums"
                     style={{
-                      color: label === "22kt" ? "#a17783" : "#03d3fc",
+                      color: label === "22kt" ? "orange" : "#03d3fc",
                     }}
                   >
                     {fmtAmount(final || 0)}
@@ -400,14 +400,24 @@ export default function Home() {
                             22kt:
                           </span>{" "}
                           {fmtAmount(s.price22Shown)} | final:{" "}
-                          {fmtAmount(s.final22)}
+                          <span
+                            className="font-semibold"
+                            style={{ color: "orange" }}
+                          >
+                            {fmtAmount(s.final22)}
+                          </span>
                         </div>
                         <div>
                           <span className="text-zinc-600 dark:text-zinc-400">
                             18kt:
                           </span>{" "}
                           {fmtAmount(s.price18Shown)} | final:{" "}
-                          {fmtAmount(s.final18)}
+                          <span
+                            className="font-semibold"
+                            style={{ color: "#03d3fc" }}
+                          >
+                            {fmtAmount(s.final18)}
+                          </span>
                         </div>
                       </div>
                     </div>
