@@ -302,7 +302,7 @@ export default function Home() {
                   <div className="text-zinc-600 dark:text-zinc-400">
                     22kt labour (24kt×99×wt − 24kt×916×wt)
                   </div>
-                  <div className="font-semibold">
+                  <div className="font-semibold" style={{ color: "orange" }}>
                     {fmtAmount(computed.labour22 || 0)}
                   </div>
                 </div>
@@ -310,7 +310,7 @@ export default function Home() {
                   <div className="text-zinc-600 dark:text-zinc-400">
                     18kt labour (24kt×83×wt − 24kt×76×wt)
                   </div>
-                  <div className="font-semibold">
+                  <div className="font-semibold" style={{ color: "#03d3fc" }}>
                     {fmtAmount(computed.labour18 || 0)}
                   </div>
                 </div>
