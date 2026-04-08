@@ -38,6 +38,10 @@ function calcShownFinal({
 export default function Home() {
   const [price24, setPrice24] = useState("");
   const [weightGm, setWeightGm] = useState("");
+  const [final22Multiplier, setFinal22Multiplier] = useState<99 | 98 | 97>(99);
+  const [final18Multiplier, setFinal18Multiplier] = useState<83 | 82 | 81 | 80>(
+    83
+  );
   const [saved, setSaved] = useState<
     Array<{
       id: string;
@@ -82,8 +86,16 @@ export default function Home() {
     const derived18 = Math.floor(derived18Raw / 100);
     const p22 = calcShownFinal({ price: p24, weightGm: w, multiplier: 916 });
     const p18 = calcShownFinal({ price: p24, weightGm: w, multiplier: 76 });
-    const final22 = calcShownFinal({ price: p24, weightGm: w, multiplier: 99 });
-    const final18 = calcShownFinal({ price: p24, weightGm: w, multiplier: 83 });
+    const final22 = calcShownFinal({
+      price: p24,
+      weightGm: w,
+      multiplier: final22Multiplier,
+    });
+    const final18 = calcShownFinal({
+      price: p24,
+      weightGm: w,
+      multiplier: final18Multiplier,
+    });
     return {
       derived22,
       derived18,
@@ -95,7 +107,7 @@ export default function Home() {
       labour22: final22.shownFinal - Math.floor(p22.shownFinal / 10),
       labour18: final18.shownFinal - p18.shownFinal,
     };
-  }, [price24, weightGm]);
+  }, [price24, weightGm, final22Multiplier, final18Multiplier]);
 
   function handleSave() {
     const key = `${price24.trim()}|${weightGm.trim()}`;
@@ -220,6 +232,43 @@ export default function Home() {
             <div className="mt-2 font-semibold tabular-nums">
               {weightGm || "—"}
             </div>
+
+            <div className="mt-4 border-t border-zinc-200 pt-4 text-left dark:border-zinc-800">
+              <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                For 22kt:
+              </div>
+              <select
+                value={final22Multiplier}
+                onChange={(e) =>
+                  setFinal22Multiplier(Number(e.target.value) as 99 | 98 | 97)
+                }
+                className="mt-2 h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-zinc-400 dark:border-zinc-800 dark:bg-black dark:focus:border-zinc-600"
+              >
+                <option value={99}>99</option>
+                <option value={98}>98</option>
+                <option value={97}>97</option>
+              </select>
+            </div>
+
+            <div className="mt-4 border-t border-zinc-200 pt-4 text-left dark:border-zinc-800">
+              <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                For 18kt:
+              </div>
+              <select
+                value={final18Multiplier}
+                onChange={(e) =>
+                  setFinal18Multiplier(
+                    Number(e.target.value) as 83 | 82 | 81 | 80
+                  )
+                }
+                className="mt-2 h-10 w-full rounded-xl border border-zinc-200 bg-white px-3 text-sm outline-none focus:border-zinc-400 dark:border-zinc-800 dark:bg-black dark:focus:border-zinc-600"
+              >
+                <option value={83}>83</option>
+                <option value={82}>82</option>
+                <option value={81}>81</option>
+                <option value={80}>80</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -238,9 +287,13 @@ export default function Home() {
                   24kt price
                 </span>
                 <input
-                  inputMode="decimal"
+                  inputMode="numeric"
+                  maxLength={6}
                   value={price24}
-                  onChange={(e) => setPrice24(e.target.value)}
+                  onChange={(e) => {
+                    const digitsOnly = e.target.value.replace(/\D/g, "");
+                    setPrice24(digitsOnly.slice(0, 6));
+                  }}
                   className="h-11 rounded-xl border border-zinc-200 bg-white px-3 text-sm outline-none ring-0 focus:border-zinc-400 dark:border-zinc-800 dark:bg-black dark:focus:border-zinc-600"
                   placeholder="e.g. 152000"
                 />
@@ -336,7 +389,7 @@ export default function Home() {
               <div className="mt-2 grid gap-2 tabular-nums">
                 <div className="flex items-center justify-between">
                   <div className="text-zinc-600 dark:text-zinc-400">
-                    22kt labour (24kt×99×wt − 24kt×916×wt)
+                    22kt labour (24kt×{final22Multiplier}×wt − 24kt×916×wt)
                   </div>
                   <div className="font-semibold" style={{ color: "orange" }}>
                     {fmtAmount(computed.labour22 || 0)}
@@ -344,7 +397,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="text-zinc-600 dark:text-zinc-400">
-                    18kt labour (24kt×83×wt − 24kt×76×wt)
+                    18kt labour (24kt×{final18Multiplier}×wt − 24kt×76×wt)
                   </div>
                   <div className="font-semibold" style={{ color: "#03d3fc" }}>
                     {fmtAmount(computed.labour18 || 0)}
