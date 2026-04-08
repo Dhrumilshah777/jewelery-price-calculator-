@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Poppins } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Jewelery Price Calculator",
-  description: "Calculate gold jewelry prices for 22kt and 18kt.",
+  title: "Amit Jewels — Jewellery Price Calculator",
+  description:
+    "Calculate gold jewellery prices for 22kt, 18kt, and 24kt with live-style rates.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    title: "Jewelery Price Calculator",
+    title: "Amit Jewels Calculator",
   },
 };
 
@@ -30,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${playfair.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }
