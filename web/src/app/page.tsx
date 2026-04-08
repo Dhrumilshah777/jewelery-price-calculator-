@@ -280,8 +280,13 @@ export default function Home() {
                   key={label}
                   className="flex items-center justify-between rounded-2xl bg-zinc-50 px-3 py-2 text-sm dark:bg-zinc-900/40"
                 >
-                  <div className="font-medium">{label}</div>
-                  <div className="font-semibold tabular-nums">
+                  <div className="font-medium">{label} Price</div>
+                  <div
+                    className="font-semibold tabular-nums"
+                    style={{
+                      color: label === "22kt" ? "#a17783" : "#03d3fc",
+                    }}
+                  >
                     {fmtAmount(final || 0)}
                   </div>
                 </div>
