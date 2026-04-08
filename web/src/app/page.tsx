@@ -340,7 +340,7 @@ export default function Home() {
                   type="button"
                   onClick={handleSave}
                   disabled={!hasInput}
-                  className="mt-4 flex h-11 w-full items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 text-sm font-semibold text-stone-100 transition enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="mt-4 flex h-11 w-full items-center justify-center rounded-xl border border-[#D4AF37]/45 bg-[#D4AF37]/12 px-4 text-sm font-semibold text-[#E8C547] shadow-[0_4px_20px_rgba(212,175,55,0.12)] transition enabled:hover:border-[#D4AF37]/70 enabled:hover:bg-[#D4AF37]/22 enabled:hover:shadow-[0_6px_24px_rgba(212,175,55,0.2)] disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   Save to history
                 </button>
