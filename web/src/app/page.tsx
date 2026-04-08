@@ -179,6 +179,38 @@ export default function Home() {
                 </span>
               </div>
             </div>
+
+            <div className="mt-4 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+              <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                Prices per gm
+              </div>
+              <div className="mt-2 grid gap-1 text-sm">
+                <div className="flex items-baseline justify-between gap-6">
+                  <span className="text-zinc-600 dark:text-zinc-400">
+                    24kt
+                  </span>
+                  <span className="font-semibold tabular-nums">
+                    {price24 ? fmtAmount(Math.floor(toNumber(price24) / 10)) : "—"}
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-6">
+                  <span className="text-zinc-600 dark:text-zinc-400">
+                    22kt
+                  </span>
+                  <span className="font-semibold tabular-nums">
+                    {price24 ? fmtAmount(Math.floor(computed.derived22 / 10)) : "—"}
+                  </span>
+                </div>
+                <div className="flex items-baseline justify-between gap-6">
+                  <span className="text-zinc-600 dark:text-zinc-400">
+                    18kt
+                  </span>
+                  <span className="font-semibold tabular-nums">
+                    {price24 ? fmtAmount(Math.floor(computed.derived18 / 10)) : "—"}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="rounded-2xl border border-zinc-200 bg-white/80 p-4 text-right backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/40">
