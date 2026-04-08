@@ -133,6 +133,10 @@ export default function Home() {
   }
 
   function handleClearSaved() {
+    const ok = window.confirm(
+      "Are you sure you want to clear all saved products?"
+    );
+    if (!ok) return;
     setSaved([]);
     try {
       localStorage.removeItem("jewelry_saved_v1");
