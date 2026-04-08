@@ -20,6 +20,10 @@ export const metadata: Metadata = {
   description:
     "Calculate gold jewellery prices for 22kt, 18kt, and 24kt with live-style rates.",
   manifest: "/manifest.json",
+  icons: {
+    icon: [{ url: "/ao-logo.jpg", type: "image/jpeg", sizes: "512x512" }],
+    apple: [{ url: "/ao-logo.jpg", type: "image/jpeg", sizes: "180x180" }],
+  },
   appleWebApp: {
     capable: true,
     title: "Amit Ornaments Calculator",
