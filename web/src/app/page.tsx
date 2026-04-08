@@ -275,7 +275,7 @@ export default function Home() {
         <main className="grid gap-6 lg:grid-cols-2">
           <section className="rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
             <h1 className="text-xl font-semibold tracking-tight">
-              Jewelry Price Calculator
+              Jewelery Price Calculator
             </h1>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
               Enter prices and weight. Final amount updates instantly.
