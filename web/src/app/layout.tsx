@@ -16,13 +16,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Amit Jewels — Jewellery Price Calculator",
+  title: "Amit Ornaments — Jewellery Price Calculator",
   description:
     "Calculate gold jewellery prices for 22kt, 18kt, and 24kt with live-style rates.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    title: "Amit Jewels Calculator",
+    title: "Amit Ornaments Calculator",
   },
 };
 

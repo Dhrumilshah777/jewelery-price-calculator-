@@ -189,7 +189,7 @@ export default function Home() {
     const w = weightGm.trim();
     const kt = karatFocus === "22" ? "22kt" : "18kt";
     const lines = [
-      "Amit Jewels — Jewellery estimate",
+      "Amit Ornaments — Jewellery estimate",
       p ? `24kt rate entered: ₹${fmtAmount(p)}` : "24kt rate: —",
       w ? `Weight: ${w} gm` : "Weight: —",
       `Today's derived 22kt: ${p ? `₹${fmtAmount(computed.derived22)}` : "—"}`,
@@ -211,7 +211,7 @@ export default function Home() {
         {/* Header */}
         <header className="mb-6 text-center md:text-left">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-[#D4AF37] sm:text-3xl">
-            Amit Jewels <span aria-hidden>💎</span>
+            Amit Ornaments <span aria-hidden>💎</span>
           </h1>
           <p className="mt-1 text-sm text-stone-400">
             Jewellery Price Calculator
@@ -336,6 +336,14 @@ export default function Home() {
                     </button>
                   ))}
                 </div>
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  disabled={!hasInput}
+                  className="mt-4 flex h-11 w-full items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 text-sm font-semibold text-stone-100 transition enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  Save to history
+                </button>
               </div>
 
               {/* Multipliers */}
@@ -385,24 +393,14 @@ export default function Home() {
                 Calculate Price
               </button>
 
-              <div className="mt-4 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={handleSave}
-                  disabled={!hasInput}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 text-sm font-semibold text-stone-100 transition enabled:hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-40 min-[400px]:flex-none"
-                >
-                  Save to history
-                </button>
-                <button
-                  type="button"
-                  onClick={handleShareWhatsApp}
-                  disabled={!hasInput}
-                  className="inline-flex h-11 flex-1 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 text-sm font-semibold text-emerald-300 transition enabled:hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-40 min-[400px]:flex-none"
-                >
-                  Share on WhatsApp
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleShareWhatsApp}
+                disabled={!hasInput}
+                className="mt-4 flex h-11 w-full items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 text-sm font-semibold text-emerald-300 transition enabled:hover:bg-emerald-500/20 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Share on WhatsApp
+              </button>
             </section>
           </div>
 

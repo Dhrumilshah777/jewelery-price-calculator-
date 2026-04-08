@@ -1,6 +1,6 @@
 {
-  "name": "Jewelery Price Calculator",
-  "short_name": "Jewelery Calc",
+  "name": "Amit Ornaments — Jewellery Price Calculator",
+  "short_name": "Amit Ornaments",
   "description": "Calculate gold jewelry prices for 22kt and 18kt.",
   "start_url": "/",
   "scope": "/",
