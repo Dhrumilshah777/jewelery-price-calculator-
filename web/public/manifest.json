@@ -1,0 +1,19 @@
+{
+  "name": "Jewelery Price Calculator",
+  "short_name": "Jewelery Calc",
+  "description": "Calculate gold jewelry prices for 22kt and 18kt.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#171717",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ]
+}
