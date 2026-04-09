@@ -46,6 +46,7 @@ export default function Home() {
   );
   const [karatFocus, setKaratFocus] = useState<KaratKey>("22");
   const [resultPulse, setResultPulse] = useState(false);
+  const [saveFeedback, setSaveFeedback] = useState<"idle" | "saved">("idle");
   const [saved, setSaved] = useState<
     Array<{
       id: string;
@@ -83,6 +84,16 @@ export default function Home() {
     }, 0);
     return () => window.clearTimeout(id);
   }, []);
+
+  useEffect(() => {
+    setSaveFeedback("idle");
+  }, [price24, weightGm, final22Multiplier, final18Multiplier]);
+
+  const currentKey = `${price24.trim()}|${weightGm.trim()}`;
+  const alreadySavedNow = useMemo(() => {
+    if (!price24.trim() || !weightGm.trim()) return false;
+    return saved.some((s) => s.key === currentKey);
+  }, [saved, currentKey, price24, weightGm]);
 
   const computed = useMemo(() => {
     const w = toNumber(weightGm);
@@ -123,7 +134,10 @@ export default function Home() {
   }, [karatFocus, computed]);
 
   function handleSave() {
-    const key = `${price24.trim()}|${weightGm.trim()}`;
+    const key = currentKey;
+    const existingIdx = saved.findIndex((s) => s.key === key);
+    if (existingIdx >= 0) return;
+
     const entry = {
       id:
         typeof crypto !== "undefined" && "randomUUID" in crypto
@@ -139,7 +153,6 @@ export default function Home() {
       final18: computed.final18.shownFinal,
     };
 
-    const existingIdx = saved.findIndex((s) => s.key === key);
     const next =
       existingIdx >= 0
         ? [
@@ -150,6 +163,8 @@ export default function Home() {
         : [entry, ...saved].slice(0, 50);
 
     setSaved(next);
+    setSaveFeedback("saved");
+    window.setTimeout(() => setSaveFeedback("idle"), 1200);
     try {
       localStorage.setItem("jewelry_saved_v1", JSON.stringify(next));
     } catch {
@@ -354,9 +369,19 @@ export default function Home() {
                   type="button"
                   onClick={handleSave}
                   disabled={!hasInput}
-                  className="mt-4 flex h-11 w-full items-center justify-center rounded-xl border border-[#D4AF37]/45 bg-[#D4AF37]/12 px-4 text-sm font-semibold text-[#E8C547] shadow-[0_4px_20px_rgba(212,175,55,0.12)] transition enabled:hover:border-[#D4AF37]/70 enabled:hover:bg-[#D4AF37]/22 enabled:hover:shadow-[0_6px_24px_rgba(212,175,55,0.2)] disabled:cursor-not-allowed disabled:opacity-40"
+                  className={`mt-4 flex h-11 w-full items-center justify-center rounded-xl border px-4 text-sm font-semibold shadow-[0_4px_20px_rgba(212,175,55,0.12)] transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                    alreadySavedNow
+                      ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-300 shadow-[0_4px_20px_rgba(16,185,129,0.12)] enabled:hover:border-emerald-500/70 enabled:hover:bg-emerald-500/15"
+                      : saveFeedback === "saved"
+                        ? "border-emerald-500/35 bg-emerald-500/8 text-emerald-300/90 enabled:hover:border-emerald-500/55 enabled:hover:bg-emerald-500/12"
+                        : "border-[#D4AF37]/45 bg-[#D4AF37]/12 text-[#E8C547] enabled:hover:border-[#D4AF37]/70 enabled:hover:bg-[#D4AF37]/22 enabled:hover:shadow-[0_6px_24px_rgba(212,175,55,0.2)]"
+                  }`}
                 >
-                  Save to history
+                  {alreadySavedNow
+                    ? "Already saved"
+                    : saveFeedback === "saved"
+                      ? "Saved"
+                      : "Save to history"}
                 </button>
               </div>
 
@@ -425,7 +450,7 @@ export default function Home() {
                 Final Price
               </div>
               <div
-                className={`mt-2 font-display text-4xl font-bold tabular-nums text-[#D4AF37] gold-glow transition ${resultPulse ? "scale-[1.02]" : ""}`}
+                className={`mt-2 font-sans text-4xl font-bold tabular-nums text-[#D4AF37] gold-glow transition ${resultPulse ? "scale-[1.02]" : ""}`}
               >
                 ₹ {fmtAmount(stickyFinal || 0)}
               </div>
@@ -608,7 +633,7 @@ export default function Home() {
             Final Price
           </div>
           <div
-            className={`mt-1 text-center font-display text-3xl font-bold tabular-nums text-[#D4AF37] gold-glow transition ${resultPulse ? "scale-[1.03]" : ""}`}
+            className={`mt-1 text-center font-sans text-3xl font-bold tabular-nums text-[#D4AF37] gold-glow transition ${resultPulse ? "scale-[1.03]" : ""}`}
           >
             ₹ {fmtAmount(stickyFinal || 0)}
           </div>
