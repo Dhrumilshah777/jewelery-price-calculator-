@@ -566,9 +566,9 @@ export default function Home() {
                       className="rounded-2xl border border-white/5 bg-black/30 p-3 text-sm"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <div className="min-w-0 flex-1 font-semibold tabular-nums text-stone-200">
+                        <div className="min-w-0 flex-1 text-base font-semibold tabular-nums text-stone-200">
                           24kt: {s.price24 ? `₹${fmtAmount(s.price24)}` : "—"} ·{" "}
-                          <span className="text-emerald-400">
+                          <span className="text-lg font-semibold text-emerald-400">
                             {s.weightGm || "—"} gm
                           </span>
                         </div>
@@ -603,13 +603,13 @@ export default function Home() {
                       <div className="mt-2 grid grid-cols-1 gap-1.5 tabular-nums sm:grid-cols-2">
                         <div className="text-stone-400">
                           22kt ref: ₹{fmtAmount(s.price22Shown)} →{" "}
-                          <span className="font-semibold text-orange-300">
+                          <span className="text-lg font-semibold text-orange-300">
                             ₹{fmtAmount(s.final22)}
                           </span>
                         </div>
                         <div className="text-stone-400">
                           18kt ref: ₹{fmtAmount(s.price18Shown)} →{" "}
-                          <span className="font-semibold text-cyan-300">
+                          <span className="text-lg font-semibold text-cyan-300">
                             ₹{fmtAmount(s.final18)}
                           </span>
                         </div>
