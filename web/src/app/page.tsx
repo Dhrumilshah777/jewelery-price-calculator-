@@ -41,9 +41,9 @@ export default function Home() {
   const [price24, setPrice24] = useState("");
   const [weightGm, setWeightGm] = useState("");
   const [final22Multiplier, setFinal22Multiplier] = useState<99 | 98 | 97>(99);
-  const [final18Multiplier, setFinal18Multiplier] = useState<83 | 82 | 81 | 80>(
-    83
-  );
+  const [final18Multiplier, setFinal18Multiplier] = useState<
+    85 | 84 | 83 | 82 | 81 | 80
+  >(83);
   const [karatFocus, setKaratFocus] = useState<KaratKey>("22");
   const [resultPulse, setResultPulse] = useState(false);
   const [saveFeedback, setSaveFeedback] = useState<"idle" | "saved">("idle");
@@ -411,11 +411,13 @@ export default function Home() {
                     value={final18Multiplier}
                     onChange={(e) =>
                       setFinal18Multiplier(
-                        Number(e.target.value) as 83 | 82 | 81 | 80
+                        Number(e.target.value) as 85 | 84 | 83 | 82 | 81 | 80
                       )
                     }
                     className="h-12 w-full rounded-xl border border-white/10 bg-black/40 px-3 text-sm outline-none focus:border-[#D4AF37]/40"
                   >
+                    <option value={85}>85</option>
+                    <option value={84}>84</option>
                     <option value={83}>83</option>
                     <option value={82}>82</option>
                     <option value={81}>81</option>
