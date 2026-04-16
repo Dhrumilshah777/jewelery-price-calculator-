@@ -235,7 +235,7 @@ export default function Home() {
   const hasInput = Boolean(price24.trim() && weightGm.trim());
 
   return (
-    <div className="min-h-dvh bg-white text-black">
+    <div className="min-h-dvh bg-[#0A0A0A] text-stone-100">
       <div className="mx-auto w-full max-w-lg px-4 pb-36 pt-6 sm:px-6 md:max-w-5xl md:pb-10">
         {/* Header */}
         <header className="mb-6 text-center md:text-left">
@@ -628,7 +628,7 @@ export default function Home() {
       {/* Sticky final — mobile (and narrow tablets); desktop duplicate above */}
       <div
         id="sticky-final"
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-[#D4AF37]/25 bg-white pb-safe backdrop-blur-xl md:hidden"
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-[#D4AF37]/25 bg-[#0A0A0A]/92 pb-safe backdrop-blur-xl md:hidden"
       >
         <div className="mx-auto max-w-lg px-4 py-4">
           <div className="text-center text-xs font-semibold uppercase tracking-widest text-stone-500">
