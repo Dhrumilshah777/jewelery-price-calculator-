@@ -40,9 +40,11 @@ type KaratKey = "22" | "18";
 export default function Home() {
   const [price24, setPrice24] = useState("");
   const [weightGm, setWeightGm] = useState("");
-  const [final22Multiplier, setFinal22Multiplier] = useState<99 | 98 | 97>(99);
+  const [final22Multiplier, setFinal22Multiplier] = useState<
+    105 | 104 | 103 | 102 | 101 | 100 | 99 | 98 | 97
+  >(99);
   const [final18Multiplier, setFinal18Multiplier] = useState<
-    85 | 84 | 83 | 82 | 81 | 80
+    85 | 84 | 83 | 82 | 81 | 80 | 78 | 75 | 74
   >(83);
   const [karatFocus, setKaratFocus] = useState<KaratKey>("22");
   const [resultPulse, setResultPulse] = useState(false);
@@ -257,19 +259,19 @@ export default function Home() {
               <div className="mt-3 grid gap-2 text-sm">
                 <div className="flex items-baseline justify-between gap-4 border-b border-white/5 pb-2">
                   <span className="text-stone-400">24kt</span>
-                  <span className="font-semibold tabular-nums text-[#D4AF37]">
+                  <span className="text-lg font-semibold tabular-nums text-[#D4AF37]">
                     {price24 ? `₹${fmtAmount(price24)}` : "—"}
                   </span>
                 </div>
                 <div className="flex items-baseline justify-between gap-4 border-b border-white/5 pb-2">
                   <span className="text-stone-400">22kt</span>
-                  <span className="font-semibold tabular-nums">
+                  <span className="text-lg font-semibold tabular-nums">
                     {price24 ? `₹${fmtAmount(computed.derived22)}` : "—"}
                   </span>
                 </div>
                 <div className="flex items-baseline justify-between gap-4">
                   <span className="text-stone-400">18kt</span>
-                  <span className="font-semibold tabular-nums">
+                  <span className="text-lg font-semibold tabular-nums">
                     {price24 ? `₹${fmtAmount(computed.derived18)}` : "—"}
                   </span>
                 </div>
@@ -394,10 +396,27 @@ export default function Home() {
                   <select
                     value={final22Multiplier}
                     onChange={(e) =>
-                      setFinal22Multiplier(Number(e.target.value) as 99 | 98 | 97)
+                      setFinal22Multiplier(
+                        Number(e.target.value) as
+                          | 105
+                          | 104
+                          | 103
+                          | 102
+                          | 101
+                          | 100
+                          | 99
+                          | 98
+                          | 97
+                      )
                     }
                     className="h-12 w-full rounded-xl border border-white/10 bg-black/40 px-3 text-sm outline-none focus:border-[#D4AF37]/40"
                   >
+                    <option value={105}>105</option>
+                    <option value={104}>104</option>
+                    <option value={103}>103</option>
+                    <option value={102}>102</option>
+                    <option value={101}>101</option>
+                    <option value={100}>100</option>
                     <option value={99}>99</option>
                     <option value={98}>98</option>
                     <option value={97}>97</option>
@@ -411,7 +430,16 @@ export default function Home() {
                     value={final18Multiplier}
                     onChange={(e) =>
                       setFinal18Multiplier(
-                        Number(e.target.value) as 85 | 84 | 83 | 82 | 81 | 80
+                        Number(e.target.value) as
+                          | 85
+                          | 84
+                          | 83
+                          | 82
+                          | 81
+                          | 80
+                          | 78
+                          | 75
+                          | 74
                       )
                     }
                     className="h-12 w-full rounded-xl border border-white/10 bg-black/40 px-3 text-sm outline-none focus:border-[#D4AF37]/40"
@@ -422,6 +450,9 @@ export default function Home() {
                     <option value={82}>82</option>
                     <option value={81}>81</option>
                     <option value={80}>80</option>
+                    <option value={78}>78</option>
+                    <option value={75}>75</option>
+                    <option value={74}>74</option>
                   </select>
                 </label>
               </div>
